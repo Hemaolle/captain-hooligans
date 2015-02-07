@@ -3,5 +3,5 @@ using System.Collections;
 
 public class GridMovement : MonoBehaviour {
 
-    public static float tileSize = 5;	
+    public static float tileSize = 10;	
 }
