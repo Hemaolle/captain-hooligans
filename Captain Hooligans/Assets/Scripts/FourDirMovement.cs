@@ -7,16 +7,18 @@ using System.Collections;
 public class FourDirMovement : MonoBehaviour {
 
     public float movementSpeed = 0.01f;
+    public delegate void MovementCallback();
 
 	bool moving = false;
     Vector3 movingDirection;
     Vector3 startPosition, endPosition;
+    protected MovementCallback moveComplete;
 
-    public void Move(Vector3 movingDirection) {
+    public void Move(Vector3 movingDirection, MovementCallback moveComplete) {
         if (!moving)
         {
+            this.moveComplete = moveComplete;
             startPosition = transform.position;
-            float yRotation = transform.rotation.eulerAngles.y;
 
             movingDirection = RotateMovingDirection (movingDirection); 
             
@@ -62,8 +64,10 @@ public class FourDirMovement : MonoBehaviour {
 	/// <summary>
 	/// Not moving anymore, so it's possible to move again.
 	/// </summary>
-	void NotMovingAnymore() {
+	protected void NotMovingAnymore() {
 		moving = false;
+        if (moveComplete != null)
+            moveComplete();
 	}
 
 	/// <summary>

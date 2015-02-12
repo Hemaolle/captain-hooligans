@@ -13,9 +13,7 @@ public class SoundEffectManager : MonoBehaviour {
 	
 	[Range(0f,1f)]
 	public float[] audioVolumes;
-	
-	private float _timer = 0.0f;
-	
+		
 	private Dictionary<string, AudioClip> _audioClipKeys;
 	private Dictionary<string, bool> _audioPlayingStatuses;
 	private Dictionary<string, float> _audioTimers;

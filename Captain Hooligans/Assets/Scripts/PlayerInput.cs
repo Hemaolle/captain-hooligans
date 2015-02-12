@@ -7,7 +7,7 @@ public class PlayerInput : MonoBehaviour {
     private FourDirMovement movement;
 	
     void Start() {
-        movement = GetComponent<FourDirMovement>();
+        movement = GetComponent<FourDirMovement>(); 
     }
 
 	// Update is called once per frame
@@ -18,7 +18,7 @@ public class PlayerInput : MonoBehaviour {
             float yRotation = transform.rotation.eulerAngles.y;
             
             Vector3 movingDirection = GetMovingDirectionFromOrientation (yRotation);
-            movement.Move(movingDirection);
+            movement.Move(movingDirection, null);
         }
 	}
 

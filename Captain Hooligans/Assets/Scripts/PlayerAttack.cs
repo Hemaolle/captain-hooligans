@@ -15,7 +15,6 @@ public class PlayerAttack : MonoBehaviour {
     private float _playerDamage;
     
     private float _timer1 = 0f;
-    private float _timer2 = 0f;
     
     void Start() {
         _playerDamage = baseDamage;
