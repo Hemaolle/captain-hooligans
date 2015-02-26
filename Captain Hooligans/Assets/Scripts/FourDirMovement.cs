@@ -18,9 +18,7 @@ public class FourDirMovement : MonoBehaviour {
         if (!moving)
         {
             this.moveComplete = moveComplete;
-            startPosition = transform.position;
-
-            movingDirection = RotateMovingDirection (movingDirection); 
+            startPosition = transform.position;            
             
             // Check for obstacles
             int obstacles = LayerMask.GetMask(new string[]{"Obstacle"});
@@ -39,27 +37,6 @@ public class FourDirMovement : MonoBehaviour {
             moving = true;
         }
     }
-
-	/// <summary>
-	/// If the palayer moves to some other direction than forward, rotate the movingDirection accordinlgy
-	/// </summary>
-	/// <returns>The rotated moving direction.</returns>
-	/// <param name="movingDirection">The original moving direction.</param>
-	Vector3 RotateMovingDirection (Vector3 movingDirection)
-	{
-		Vector3 newMovingDirection = Vector3.zero;
-		if (Input.GetAxisRaw ("Horizontal") == 1)
-			newMovingDirection = Quaternion.Euler (new Vector3 (0, 90, 0)) * movingDirection;
-		else
-			if (Input.GetAxisRaw ("Horizontal") == -1)
-				newMovingDirection = Quaternion.Euler (new Vector3 (0, 270, 0)) * movingDirection;
-			else
-				if (Input.GetAxisRaw ("Vertical") == -1)
-					newMovingDirection = Quaternion.Euler (new Vector3 (0, 180, 0)) * movingDirection;
-				else
-					return movingDirection;
-		return newMovingDirection;
-	}
 
 	/// <summary>
 	/// Not moving anymore, so it's possible to move again.

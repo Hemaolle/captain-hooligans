@@ -18,6 +18,8 @@ public class PlayerInput : MonoBehaviour {
             float yRotation = transform.rotation.eulerAngles.y;
             
             Vector3 movingDirection = GetMovingDirectionFromOrientation (yRotation);
+			movingDirection = RotateMovingDirection (movingDirection); 
+
             movement.Move(movingDirection, null);
         }
 	}
@@ -44,4 +46,26 @@ public class PlayerInput : MonoBehaviour {
                 newMovingDirection = Vector3.left;
         return newMovingDirection;
     }
+
+	/// <summary>
+	/// If the palayer moves to some other direction than forward, rotate the movingDirection accordinlgy
+	/// </summary>
+	/// <returns>The rotated moving direction.</returns>
+	/// <param name="movingDirection">The original moving direction.</param>
+	Vector3 RotateMovingDirection (Vector3 movingDirection)
+	{
+		Vector3 newMovingDirection = Vector3.zero;
+		if (Input.GetAxisRaw ("Horizontal") == 1)
+			newMovingDirection = Quaternion.Euler (new Vector3 (0, 90, 0)) * movingDirection;
+		else
+			if (Input.GetAxisRaw ("Horizontal") == -1)
+				newMovingDirection = Quaternion.Euler (new Vector3 (0, 270, 0)) * movingDirection;
+		else
+			if (Input.GetAxisRaw ("Vertical") == -1)
+				newMovingDirection = Quaternion.Euler (new Vector3 (0, 180, 0)) * movingDirection;
+		else
+			return movingDirection;
+		return newMovingDirection;
+	}
+
 }
