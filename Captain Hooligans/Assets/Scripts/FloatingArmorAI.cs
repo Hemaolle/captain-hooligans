@@ -31,7 +31,7 @@ public class FloatingArmorAI : MonoBehaviour {
 //        else if (random < 0.4f)
 //            movement.TurnRight(MoveEnded);
 //        else
-            movement.Move(transform.TransformDirection(Vector3.forward), MoveEnded);
+            movement.Move(FourDirMovement.FourDirections.Forward, MoveEnded);
         moving = true;
     }
 
