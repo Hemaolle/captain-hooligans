@@ -21,7 +21,7 @@ public class FloatingArmorAI : MonoBehaviour {
         if (!moving && Time.timeSinceLevelLoad - lastMovementEnded > idleBetweenActions)
         {
             //RandomizeNextAction();
-            transform.TransformDirection(ToPlayerTile());
+            //transform.TransformDirection(ToPlayerTile());
             movement.Move(ToPlayerTile(), MoveEnded);
             moving = true;
 
@@ -36,7 +36,7 @@ public class FloatingArmorAI : MonoBehaviour {
         else if (random < 0.4f)
             movement.TurnRight(MoveEnded);
         else
-            movement.Move(transform.TransformDirection(Vector3.forward), MoveEnded);
+            movement.Move(FourDirMovement.FourDirections.Forward, MoveEnded);
         moving = true;
     }
 
@@ -45,12 +45,13 @@ public class FloatingArmorAI : MonoBehaviour {
 
 
   
-    Vector3 ToPlayerTile(){
+    FourDirMovement.FourDirections ToPlayerTile(){
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         newMovingDirection = player.transform.position - transform.position;
         Debug.Log(player.transform.position- transform.position);
         newMovingDirection.Normalize();
+        newMovingDirection = transform.TransformDirection(newMovingDirection);
 
         float forA, backA, leftA, rightA;
 
@@ -61,20 +62,16 @@ public class FloatingArmorAI : MonoBehaviour {
 
         if (forA <= 45.1)
         {
-            return Vector3.forward;
+            return FourDirMovement.FourDirections.Forward;
         } else if (backA <= 45.1)
         {
-            return Vector3.back;
+            return FourDirMovement.FourDirections.Back;
         } else if (leftA <= 45.1)
         {
-            return Vector3.left;
-        } else if (rightA <= 45.1)
-        {
-            return Vector3.right;
-        } else
-        {
-            return Vector3.zero;
+            return FourDirMovement.FourDirections.Left;
         }
+        return FourDirMovement.FourDirections.Right;
+
     }
 
     void MoveEnded() {
