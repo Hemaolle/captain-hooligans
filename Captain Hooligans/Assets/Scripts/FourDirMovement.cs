@@ -87,8 +87,8 @@ public class FourDirMovement : MonoBehaviour {
 				facingDirection = Vector3.back;
 		else
 			if (225 < yRotation && yRotation < 360 - 45)
-				facingDirection = Vector3.left;
-		Vector3 globalDirection = Quaternion.FromToRotation(Vector3.forward, localMovementDirectionVector) * facingDirection;
+				facingDirection = Vector3.left;		
+        Vector3 globalDirection = Quaternion.LookRotation(localMovementDirectionVector, Vector3.up) * facingDirection;
 
 		return globalDirection;
 	}

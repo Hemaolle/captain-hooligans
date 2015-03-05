@@ -51,7 +51,7 @@ public class FloatingArmorAI : MonoBehaviour {
         newMovingDirection = player.transform.position - transform.position;
         Debug.Log(player.transform.position- transform.position);
         newMovingDirection.Normalize();
-        newMovingDirection = transform.TransformDirection(newMovingDirection);
+        newMovingDirection = transform.InverseTransformDirection(newMovingDirection);
 
         float forA, backA, leftA, rightA;
 
