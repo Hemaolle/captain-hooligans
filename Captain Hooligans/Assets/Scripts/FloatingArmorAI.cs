@@ -20,10 +20,10 @@ public class FloatingArmorAI : MonoBehaviour {
 	void Update () {
         if (!moving && Time.timeSinceLevelLoad - lastMovementEnded > idleBetweenActions)
         {
-            //RandomizeNextAction();
+            RandomizeNextAction();
             //transform.TransformDirection(ToPlayerTile());
-            movement.Move(ToPlayerTile(), MoveEnded);
-            moving = true;
+//            movement.Move(ToPlayerTile(), MoveEnded);
+//            moving = true;
 
         }
 	}
